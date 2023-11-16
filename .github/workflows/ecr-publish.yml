@@ -1,0 +1,55 @@
+name: Build and Publish to ECR
+
+on:
+  push:
+    branches:
+      - main
+      - '*'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build container image
+      run: docker build -t user-ppe:${{ github.sha }} -f Dockerfile .
+
+    - name: Login to Amazon ECR
+      if: github.ref == 'refs/heads/main'
+      uses: aws-actions/amazon-ecr-login@v1
+
+    - name: Push to Amazon ECR
+      if: github.ref == 'refs/heads/main'
+      run: |
+        docker tag user-ppe:${{ github.sha }} $ECR_REGISTRY/$ECR_REPOSITORY:user-ppe:${{ github.sha }}
+        docker tag user-ppe:${{ github.sha }} $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:user-ppe:${{ github.sha }}
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+      env:
+        ECR_REGISTRY: <din-ecr-registry-url>
+        ECR_REPOSITORY: <din-ecr-repository-navn>
+        
+  deploy-with-terraform:
+    needs: build-and-push-docker
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Plan
+      run: terraform plan
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        TF_VAR_iam_policy_name: ${{ secrets.IAM_POLICY_NAME }}
+        TF_VAR_iam_role_name: ${{ secrets.IAM_ROLE_NAME }}
+        TF_VAR_service_name: ${{ secrets.SERVICE_NAME }}
