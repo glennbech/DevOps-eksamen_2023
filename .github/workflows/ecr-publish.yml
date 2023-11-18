@@ -31,9 +31,9 @@ jobs:
       if: github.ref == 'refs/heads/main'
       run: |
         echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-        docker tag 2017-ppe:$SHORT_SHA $ECR_REGISTRY/$ECR_REPOSITORY:2017-ppe:$SHORT_SHA
+        docker tag 2017-ppe:$SHORT_SHA $ECR_REGISTRY/$ECR_REPOSITORY:$SHORT_SHA
         docker tag 2017-ppe:$SHORT_SHA $ECR_REGISTRY/$ECR_REPOSITORY:latest
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:2017-ppe:$SHORT_SHA
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$SHORT_SHA
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
       env:
         ECR_REGISTRY: 244530008913.dkr.ecr.eu-west-1.amazonaws.com
