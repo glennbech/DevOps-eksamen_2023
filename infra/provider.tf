@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "pgr301-2021-terraform-state"
+    bucket = "Kandidat2017"
     key    = "Kandidat2017/apprunner.state"
     region = "eu-west-1"
   }
