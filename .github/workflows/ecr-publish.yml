@@ -15,7 +15,7 @@ jobs:
 
     - name: Build container image
       run: |
-        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
         docker build -t 2017-ppe:$SHORT_SHA -f Dockerfile .
         docker tag 2017-ppe:$SHORT_SHA 2017-ppe:latest
 
@@ -30,7 +30,7 @@ jobs:
     - name: Push to Amazon ECR
       if: github.ref == 'refs/heads/main'
       run: |
-        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
         docker tag 2017-ppe:$SHORT_SHA $ECR_REGISTRY/$ECR_REPOSITORY:2017-ppe:$SHORT_SHA
         docker tag 2017-ppe:$SHORT_SHA $ECR_REGISTRY/$ECR_REPOSITORY:latest
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:2017-ppe:$SHORT_SHA
