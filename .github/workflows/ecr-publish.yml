@@ -1,11 +1,6 @@
 name: Build and Publish to ECR
 
-on:
-  workflow_dispatch:
-#  push:
-#    branches:
-#      - main
-#      - '*'
+on: [push]
 
 jobs:
   build-and-push-docker:
