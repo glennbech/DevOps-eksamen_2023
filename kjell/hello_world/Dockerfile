@@ -1,5 +1,5 @@
-FROM python:3.8-slim
-WORKDIR /app
-COPY . /app
-RUN pip install --no-cache-dir boto3 awscli
+FROM python:3.9
+COPY app.py .
+COPY requirements.txt .
+RUN pip3 install -r requirements.txt
 CMD ["python", "app.py"]
