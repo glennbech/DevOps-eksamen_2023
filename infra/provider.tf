@@ -8,10 +8,6 @@ terraform {
   backend "s3" {
     bucket = "pgr301-2021-terraform-state"
     key    = "Kandidat2017/apprunner.state"
-    region = "eu-north-1"
+    region = "eu-west-1"
   }
-}
-
-provider "aws" {
-  region = "eu-north-1"
 }
