@@ -6,7 +6,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "Kandidat2017"
+    bucket = "kandidat2017"
     key    = "terraform/apprunner.state"
     region = "eu-west-1"
   }
