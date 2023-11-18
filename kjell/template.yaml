@@ -16,10 +16,13 @@ Resources:
   Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: "kandidat2017-2"
+      BucketName: "kanditatkandidat"
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
+          Environment:
+        Variables:
+          BUCKET_NAME: "kanditatkandidat"
       CodeUri: hello_world/
       Handler: app.lambda_handler
       Runtime: python3.9
@@ -27,6 +30,7 @@ Resources:
         - x86_64
       Policies:
         - AmazonRekognitionFullAccess
+        - AmazonS3ReadOnlyAccess
       Events:
         HelloWorld:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
