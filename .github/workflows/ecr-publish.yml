@@ -44,7 +44,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
-      IMAGE: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/adma007-private:2017-ppe:latest
+      IMAGE: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/adma007-private:latest
       SERVICE_NAME: kandidat2017
     steps:
     - uses: actions/checkout@v2
