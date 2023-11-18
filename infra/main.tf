@@ -64,7 +64,7 @@ data "aws_iam_policy_document" "policy" {
 
 resource "aws_iam_policy" "policy" {
   name        = "${var.service_name}policy_name"
-  description = "Policy for apprunner instance I think"
+  description = "Policy for apprunner instance"
   policy      = data.aws_iam_policy_document.policy.json
 }
 
