@@ -15,8 +15,9 @@ jobs:
 
     - name: Build container image
       run: |
-        docker build -t 2017-ppe:${{ github.sha }} -f Dockerfile .
-        docker tag 2017-ppe:${{ github.sha }} 2017-ppe:latest
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        docker build -t 2017-ppe:$SHORT_SHA -f Dockerfile .
+        docker tag 2017-ppe:$SHORT_SHA 2017-ppe:latest
 
     - name: Login to Amazon ECR
       if: github.ref == 'refs/heads/main'
@@ -29,9 +30,10 @@ jobs:
     - name: Push to Amazon ECR
       if: github.ref == 'refs/heads/main'
       run: |
-        docker tag 2017-ppe:${{ github.sha }} $ECR_REGISTRY/$ECR_REPOSITORY:2017-ppe-${{ github.sha }}
-        docker tag 2017-ppe:${{ github.sha }} $ECR_REGISTRY/$ECR_REPOSITORY:latest
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:2017-ppe-${{ github.sha }}
+        run: echo "SHORT_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        docker tag 2017-ppe:$SHORT_SHA $ECR_REGISTRY/$ECR_REPOSITORY:2017-ppe:$SHORT_SHA
+        docker tag 2017-ppe:$SHORT_SHA $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:2017-ppe:$SHORT_SHA
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
       env:
         ECR_REGISTRY: 244530008913.dkr.ecr.eu-west-1.amazonaws.com
@@ -42,7 +44,7 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     env:
-      IMAGE: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/adma007-private:2017-ppe:${{ github.sha }}
+      IMAGE: 244530008913.dkr.ecr.eu-west-1.amazonaws.com/adma007-private:2017-ppe:latest
       SERVICE_NAME: kandidat2017
     steps:
     - uses: actions/checkout@v2
