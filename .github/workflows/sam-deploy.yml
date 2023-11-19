@@ -1,6 +1,6 @@
 name: SAM Application Deploy
 
-on: [push]
+on: push
 
 jobs:
   deploy:
