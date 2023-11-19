@@ -1,6 +1,6 @@
 name: SAM Application Deploy
 
-on: push
+on: workflow_dispatch
 
 jobs:
   deploy:

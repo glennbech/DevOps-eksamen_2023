@@ -16,6 +16,7 @@ Når jeg brukte kjellsimagebucket fikk jeg en feilmelding som sier "invalid imag
 
 ## Oppgave 2A
 "docker build -t ppe ." bygger følgende:
+
  ![oppgave 2a](https://github.com/aadnehm/DevOps-eksamen_2023/blob/main/img/build.PNG)
 
  "docker run -p 8080:8080 -e AWS_ACCESS_KEY_ID=XXX -e AWS_SECRET_ACCESS_KEY=YYY -e BUCKET_NAME=kjellsimagebucket ppe" kjører følgende:
@@ -30,11 +31,11 @@ I denne workflowen lagde jeg en short-sha, fordi sha er litt for lang. ECR_REPOS
 ## Oppgave 3A
 Hardkoding av service_name ble byttet ut med en variabel som nå blir satt i workflow filen lenket til i oppgave 2B. De hardkodede variablene jeg valgte å bytte ut var service_name og image. Vurderte å bytte ut role og policy med variabler, men satte det heller til "${var.service_name}-role" og "${var.service_name}-policy". Vurderte å sette port til en variabel. Det kunne vært relevant på jobb, men på eksamen ser jeg ikke poenget. CPU og memory endret:
 
-  instance_configuration {
-    instance_role_arn = aws_iam_role.role_for_apprunner_service.arn
-    cpu = 256
-    memory = 1024
-  }
+    instance_configuration {
+      instance_role_arn = aws_iam_role.role_for_apprunner_service.arn
+      cpu = 256
+      memory = 1024
+    }
 
 ## Oppgave 3B
 La til terraform i samme workflow som lenket til i oppgave 2B. Terraform jobben har linjen "needs: build-and-push-docker", som gjør at den kun kjører etter build-and-push-docker jobben har kjørt og passert. Terraform provider og backend ligger i provider.tf.
