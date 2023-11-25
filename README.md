@@ -44,7 +44,7 @@ Hardkoding av service_name ble byttet ut med en variabel som nå blir satt i wor
 
 ## Oppgave 3B
 La til terraform i samme workflow som lenket til i oppgave 2B. Terraform jobben har linjen "needs: build-and-push-docker", som gjør at den kun kjører etter build-and-push-docker jobben har kjørt og passert. Terraform provider og backend ligger i provider.tf.
-Om sensor enda ikke har lagt til krecde secrets må det gjøres for å få kjørt workflowen. Her kan man også endre env: "IMAGE" og "SERVICE_NAME" om sensor skulle ønske. Jobben kjører kun hvis workflowen ble startet fra main branchen.
+Om sensor enda ikke har lagt til nødvendige secrets må det gjøres for å få kjørt workflowen. Her kan man også endre env: "IMAGE" og "SERVICE_NAME" om sensor skulle ønske. Jobben kjører kun hvis workflowen ble startet fra main branchen.
 
 # Oppgave 4. Feedback
 ## Oppgave 4A
@@ -70,13 +70,13 @@ Ett av målene - og fordelene - med scrum metodikk er at man får et mye klarere
 Noen ulemper med scrum er at det ikke passer for alle prosjekter. Et personlig problem jeg har med scrum er at det blir veldig mange møter som kan hindre fremgang. I prosjekter jeg har deltatt i blir det ikke brukt sprints. Grunnen til dette er at å utvikle funksjonaliteter innenfor et satt tidsrom ikke gir like stor mulighet for utforsking og kreative løsninger.
 
 ### DevOps Metodikk:
-Grunnleggende prinsipper:
+#### Grunnleggende prinsipper:
 DevOps er et sett med praksiser som tar sikte på å forbedre samarbeid og produktivitet. DevOps skal sørge for kontinuerlig kommunikasjon og samarbeid mellom utviklere, IT-driftspersonell og andre interessenter i organisasjonen. DevOps innebærer også automasjon, som ble nevnt i oppgave 5a. CI/CD Automatiserer integrerings- og distribusjonsprosessen for å sikre hyppige og pålitelige kodeutgivelser. DevOps kan også håndtere og tilrettelegge infrastruktur gjennom kode i stedet for manuelle prosesser. automatiseringen inkluderer også automatiserte enhets-, integrasjons-, og systemtester for å sikre kodekvalitet. Kontinuerlig overvåking og tilbakemelding av applikasjoner og infrastrukturprestasjoner for raskt å identifisere problemer. Alt dette er basert på å gjøre små, hyppige og håndterbare endringer heller enn store, sjeldne oppdateringer.
 
-Styrker ved bruk av DevOps:
+#### Styrker ved bruk av DevOps:
 Forbedret samarbeid og moral. DevOps bryter ned veggene mellom team fører til bedre samarbeid, forståelse og jobbtilfredshet. Økt effektivitet og produktivitet. Automatisering reduserer manuelt arbeid, noe som fører til mer effektive prosesser og høyere produktivitet. Raskere løsning av problemer. Kontinuerlig overvåking og rask tilbakemelding tillater raskere identifisering og løsning av problemer. Forbedret kundetilfredshet. Raskere levering av funksjoner og rettelser fører til høyere kundetilfredshet.
 
-Utfordringer:
+#### Utfordringer:
 Å flette DevOps inn i hverdagen krever kulturendring. Å skifte til en DevOps-kultur krever betydelige endringer i tankegang og praksiser, noe som kan være utfordrende for noen organisasjoner. DevOps krever også et bredt spekter av ferdigheter, inkludert koding, infrastrukturhåndtering og mer. Opplæring av eksisterende personell eller ansettelse av nytt personell med disse ferdighetene kan være en utfordring. Implementering og vedlikehold av de ulike verktøyene som kreves for automatisering, overvåking og samarbeid kan også være komplekst. DevOps kommer også med sikkerhetsbekymringer. Raske utviklingssykluser kan potensielt føre til sikkerhetshull hvis de ikke nøye håndteres.
 
 ### Sammenligning og Kontrast:
