@@ -12,6 +12,7 @@ Eventuelt også --stack-name i sam-deploy.yml som foreløpig er "kandidat2017new
 
 # Oppgave 1. Kjell's Python kode
 ## Oppgave 1A
+https://github.com/aadnehm/DevOps-eksamen_2023/blob/main/.github/workflows/sam-deploy.yml
 
 ## Oppgave 1B
 Når jeg brukte kjellsimagebucket fikk jeg en feilmelding som sier "invalid image format", noe som Glenn har nevnt i en kunngjøring. I bucketen er det noen non-image filer som jeg ikke tørr å slette. La inn bilde i egen bucket og fikk riktig svar.
@@ -34,7 +35,7 @@ I denne workflowen lagde jeg en short-sha, fordi sha er litt for lang. ECR_REPOS
 
 # Oppgave 3- Terraform, AWS Apprunner og Infrastruktur som kode
 ## Oppgave 3A
-Hardkoding av service_name ble byttet ut med en variabel som nå blir satt i workflow filen lenket til i oppgave 2B. De hardkodede variablene jeg valgte å bytte ut var service_name og image. Vurderte å bytte ut role og policy med variabler, men satte det heller til "${var.service_name}-role" og "${var.service_name}-policy". Vurderte å sette port til en variabel. Det kunne vært relevant på jobb, men på eksamen ser jeg ikke poenget. CPU og memory endret:
+Hardkoding av service_name ble byttet ut med en variabel som nå blir satt i workflow filen lenket til i oppgave 2B. De hardkodede variablene jeg valgte å bytte ut var service_name og image. Vurderte å bytte ut role og policy med variabler, men satte det heller til "${var.service_name}-role" og "${var.service_name}-policy". Dettte ville jeg selvfølgelig ikke gjort i et ekte tilfelle da alt som genereres, men også må ha unikt navn burde ha grundig error handling. Dette gjelder da også alt annet i koden som skal være unikt. I skrivende stund ikke implementert, men vi får se. Vurderte å sette port til en variabel. Det kunne vært relevant på jobb, men på eksamen ser jeg ikke poenget. CPU og memory endret:
 
     instance_configuration {
       instance_role_arn = aws_iam_role.role_for_apprunner_service.arn
@@ -66,7 +67,7 @@ Vi tar utgangspunk i 4-5 utviklere i kun ett repository, men én produkteier/rep
 ### Scrum/Smidig Metodikk:
 Scrum er et verktøy for å effektivisere utviklingsprosessen. Et scrum team består som regel av en scrum master, en produkteier og et utviklingsteam. Dette teamet tar ofte i bruk backlogger for å holde oversikt over hva som gjenstår å utvikle. Det er vanlig å ha såkalte "sprints" som strekker seg over en fast tid, ofte 2-4 uker, men dette er noe som varierer veldig fra prosjekt til prosjekt. Man benytter seg ofte av daily standup for å dele fremgang og utfordringer. En viktig del av scrum er også sprint retrospective der man reflekterer over sprintene og hvilke endringer som bør gjøres.
 
-Ett av målene - og fordelene - med scrum metodikk er at man får et mye klarere bilde av hva som skal gjøres og hvor lang tid det vil ta. Dette hjelper utviklere med å jobbe mer effektivt, og gir produkteier og "stakeholders" bedre innsikt i utviklingsprosessen. Siden man itererer over så korte perioder blir det også lettere å få kontinuerlig feedback fra produkteier og stakeholders, og dermed lettere å korrigere retningen i prosjektet. 
+Ett av målene - og fordelene - med scrum metodikk er at man får et mye klarere bilde av hva som skal gjøres og hvor lang tid det vil ta. Dette hjelper utviklere å jobbe mer effektivt, og gir produkteier og "stakeholders" bedre innsikt i utviklingsprosessen. Siden man itererer over så korte perioder blir det også lettere å få kontinuerlig feedback fra produkteier og stakeholders, og dermed lettere å korrigere retningen i prosjektet. 
 Noen ulemper med scrum er at det ikke passer for alle prosjekter. Et personlig problem jeg har med scrum er at det blir veldig mange møter som kan hindre fremgang. I prosjekter jeg har deltatt i blir det ikke brukt sprints. Grunnen til dette er at å utvikle funksjonaliteter innenfor et satt tidsrom ikke gir like stor mulighet for utforsking og kreative løsninger.
 
 ### DevOps Metodikk:
